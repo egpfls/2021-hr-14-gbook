@@ -11,10 +11,10 @@ const error500 = (err, req, res, next)=>{
 	const ejs = {
 		status: err.status === 404 ? 404 : 500,
 		message: err.code || err.message,
-		headTitle: `ERROR ${err.status === 404 ? 404 : 500}`,
-		description: err.description || err.message
+		description: err.description || err.message,
+		tabTitle: `ERROR ${err.status === 404 ? 404 : 500}`,
 	}
 	res.render('error/error', ejs);
-}
+};
 
 module.exports = {createError, error404, error500};

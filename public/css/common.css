@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Cute+Font&family=Noto+Sans+KR:wght@300;400;500&display=swap');
+
+/* 
+font-family: 'Cute Font', cursive;
+font-family: 'Noto Sans KR', sans-serif;
+ */
+
+html, body {font-family: 'Noto Sans KR', sans-serif;}
+.wrapper {max-width: 1200px; margin: auto;}
+
+@media screen and (max-width: 1200px){
+	.wrapper {width: calc(100% - 1em);}
+}

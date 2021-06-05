@@ -2,7 +2,7 @@ const moment = require('moment');
 const path = require('path')
 const fs = require('fs-extra');
 const { v4: uuid } = require('uuid');
-const {allowExt} = require('../modules/utils');
+const {allowExt, imgExt } = require('../modules/utils');
 const multer = require('multer');
 
 
@@ -34,14 +34,14 @@ const storage = multer.diskStorage({	destination, filename });
 
 // filesize 제한
 const mega = 1024000;
-const limits = { fileSize: mega * 50 }
+const limits = { fileSize: mega * 5 }
 
 // filetype 제한
 function fileFilter(req, file, cb) {
 	try{
-	let ext = path.extname(file.originalname).substr(1).toLowerCase();
-	if(allowExt.includes(ext)) cb(null, true);
-	else cb(null, false);
+		let ext = path.extname(file.originalname).substr(1).toLowerCase();
+		if(imgExt.includes(ext)) cb(null, true);
+		else cb(new Error('첨부하신 파일은 업로드가 허용되지 않습니다.'), false);
 	}
 	catch(err){
 		cb(err);
@@ -50,6 +50,11 @@ function fileFilter(req, file, cb) {
 }
 
 // multer instance 생성
-var upload = multer({  storage, limits, fileFilter });
+const upload = multer({  storage, limits, fileFilter });
 
 module.exports = {multer, upload};
+
+/* 
+size over => error발생
+filter => error(x)
+*/
