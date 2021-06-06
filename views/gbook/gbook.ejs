@@ -16,11 +16,15 @@
 			</tr>
 		</thead>
 		<tbody>
-			<%- include('./list') %> 
+			<% for( let v of lists ) { %>
+				<%- include('./list', {v}) %> 
+				<% } %>
 		</tbody>
 	</table>
 </div>
 
+<%- include('../inc/pager.ejs', {...pager}) %> 
+<%- include('./modal.ejs') %> 
 
 <%- include('../inc/footer') %> 
 <script src="/js/gbook/gbook.js"></script>

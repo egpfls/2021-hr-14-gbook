@@ -64,3 +64,5 @@ input, button {border-radius: 0; outline: none; border: none; background-color: 
 .swiper-button-prev, 
 .swiper-button-next, 
 .swiper-pagination * {outline: none; cursor: pointer;}
+
+.btn {color: #fff !important;}
