@@ -1,5 +1,6 @@
 const createError = require('http-errors');
 const moment = require('moment')
+const path = require('path');
 
 const imgExt = ['jpg', 'jpeg', 'png', 'gif'];
 const docExt = ['ppt', 'pptx', 'xls', 'xlsx', 'doc', 'docx', 'pages', 'numbers', 'key', 'pdf', 'hwp'];
@@ -38,7 +39,7 @@ const transDate = (date, type) => {
 	}
 } 
 const transFrontSrc =name => name ? '/uploads/' + name.substr(0, 6) + '/' + name : null;
-const transBackSrc =name => name ? '/storages/' + name.substr(0, 6) + '/' + name : null;
+const transBackSrc =name => name ? path.join(__dirname, '../storages/',name.substr(0, 6) ,name) : null;
 
 const makePager = (_page, _totalRecord, _listCnt=10, _pagerCnt=5) => {
 	let page = Number(_page);

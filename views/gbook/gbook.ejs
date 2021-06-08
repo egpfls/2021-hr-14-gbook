@@ -12,7 +12,9 @@
 				<th>내용</th>
 				<th>첨부</th>
 				<th>작성일</th>
-				<th>관리</th>
+				<% if(user) { %>
+					<th>관리</th>
+				<% } %>
 			</tr>
 		</thead>
 		<tbody>
@@ -22,9 +24,10 @@
 		</tbody>
 	</table>
 </div>
-
+<% if(lists && lists.lenght > 0) { %>
 <%- include('../inc/pager.ejs', {...pager}) %> 
 <%- include('./modal.ejs') %> 
+<% } %>
 
 <%- include('../inc/footer') %> 
 <script src="/js/gbook/gbook.js"></script>
