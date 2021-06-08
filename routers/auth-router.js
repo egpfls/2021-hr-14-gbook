@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcrypt');
 const { pool } = require('../modules/mysql-init');
 const { upload } = require('../modules/multer-init');
 const { error, alert,  transDate, transFrontSrc, makePager} = require('../modules/utils');
