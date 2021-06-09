@@ -68,7 +68,7 @@ router.post('/save', isUser, upload.single('upfile'), async (req, res, next) => 
 		} else { // 저장
 			sql = 'INSERT INTO gbook SET writer=?, content=?, uid=?';
 			values = [writer, content];
-			var [r] = await pool.execute(sql, [writer, content, id, req.session.user.id]);
+			var [r] = await pool.execute(sql, [writer, content, req.session.user.id]);
 			r.id = r.insertId;
 		}
 		if (req.file) { // 첨부파일 처리
@@ -112,7 +112,7 @@ router.get('/remove/:id', isUser, async (req, res, next) => {
 		let id = req.params.id;
 		sql = 'SELECT * FROM gbookfile WHERE gid=?'; // 일단 첨부파일 가져옴
 		const [r] = await pool.execute(sql, [id]);
-		sql = 'DELDTE FROM gbook WHERE id=? AND uid=?'; // 글 레코드 삭제 -> 첨부파일 레코드도 삭제
+		sql = 'DELETE FROM gbook WHERE id=? AND uid=?'; // 글 레코드 삭제 -> 첨부파일 레코드도 삭제
 		const [r2] = await pool.execute(sql, [id, req.session.user.id]);
 		if (r2.affectedRows === 1) { // 글 레코드 및 첨부파일 레코드가 삭제됐다면..
 			if(r.length === 1) await fs.remove(transBackSrc(r[0].savename)); // 실제 첨부파일 삭제
@@ -151,6 +151,7 @@ router.get('/view/:id', isUser, async (req, res, next) => {
 		});
 	}
 });
+
 
 router.get('/file/remove', isUser, async (req, res, next) => {
 	try {
